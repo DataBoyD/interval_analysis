@@ -120,7 +120,7 @@ class NewtonComputations:
 
     common_base = []
 
-    def __init__(self, f, first_der, primary_interval: Interval, eps: float = 1e-17):
+    def __init__(self, f, first_der, primary_interval: Interval, eps: float = 1e-29):
         self.f = f
         self.der = IntervalExtensionFunction(first_der)
         self.primary_interval = primary_interval
@@ -131,19 +131,20 @@ class NewtonComputations:
         nip.start()
 
 
-f = lambda x: math.sin(x) - 0.5
-der_f = lambda x: x.cos(x)
+f = lambda x: x ** 67 - Decimal(0.5292992393494939439493444)
+der_f = lambda x: 67 * x ** 66
 
 
 # f = lambda x: x ** 2 + 2 * x + 1 - Decimal(math.sin(x ** 2))
 # der_f = lambda x: 2 * x + 2 - 2 * x * x.cos(x)
 
 
-a = Interval([-4, -3])
+a = Interval([-1, 1])
+# print(der_f(a))
 a.setprecision(40)
 
 
-n = NewtonComputations(f, der_f, a, eps=1e-10)
+n = NewtonComputations(f, der_f, a, eps=1e-35)
 n.run()
 
 
