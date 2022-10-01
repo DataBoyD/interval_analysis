@@ -1,7 +1,8 @@
 import math
 from math import sin
 
-from interval_lib import *
+
+from practice_interval.interval_lib import *
 
 i_1 = Interval([5, 500])
 i_2 = Interval([1, 2])
