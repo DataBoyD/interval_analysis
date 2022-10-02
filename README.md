@@ -43,8 +43,8 @@ $$\mathcal{N}(\textbf{X}, x) := x - \frac{f(x)}{f'(\textbf{X})}$$
 $$\textbf{X}^{(k+1)} ← \textbf{X}^{(k)}\cap \mathcal{N}(x, \textbf{X})$$
 
 ## Пример
-dfffdfdfd 
-<img src="newton_method/static/example.png" width="300" height="300" class="leftimg"/> 
+ 
+> <img src="newton_method/static/example.png" width="300" height="300" class="leftimg"/> 
 > Будем искать нули функции $$f(x) =  x^2 + 2x\sin{x}  -4$$
 
 
