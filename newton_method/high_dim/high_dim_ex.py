@@ -1,7 +1,7 @@
 import decimal
 import numpy as np
 from practice_interval.interval_lib import *
-from high_dim_class import HightDimensionalIntervalNewtonProcess
+from high_dim_class import HighDimensionalIntervalNewtonProcess
 
 
 f = lambda x: np.array([
@@ -27,7 +27,7 @@ x_0 = np.array([
 ]).reshape(-1, 1)
 
 
-hdNewt = HightDimensionalIntervalNewtonProcess(f, jacobian, x_0, precision=1e-21)
+hdNewt = HighDimensionalIntervalNewtonProcess(f, jacobian, x_0, precision=1e-21)
 hdNewt.start()
 
 
@@ -42,7 +42,7 @@ x_0 = np.array([
 ]).reshape(-1, 1)
 
 
-hdNewt = HightDimensionalIntervalNewtonProcess(f, jacobian, x_0)
+hdNewt = HighDimensionalIntervalNewtonProcess(f, jacobian, x_0)
 hdNewt.start()
 
 

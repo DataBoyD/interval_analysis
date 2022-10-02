@@ -5,7 +5,7 @@ from practice_interval.interval_lib import *
 from practice_interval.newton_method.high_dim.matrix_inversion import MatrixInversion
 from intersection_tools import intersection
 
-class HightDimensionalIntervalNewtonProcess:
+class HighDimensionalIntervalNewtonProcess:
 
     def __init__(self, f, jacobian, primary_value, precision = 1e-15):
         self.f = f
