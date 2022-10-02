@@ -32,10 +32,6 @@ $$\mathcal{N}(\textbf{X}, x) := x - \frac{f(x)}{f'(\textbf{X})}$$
 Общий вид итерационного процесса:
 $$\textbf{X}^{(k+1)} ← \textbf{X}^{(k)}\cap \mathcal{N}(x, \textbf{X})$$
 
-## Пример
- 
 
-Будем искать нули функции $$f(x) =  x^2 + 2x\sin{x} - 4$$
-![](https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/static/example.png)
-
+## Многомерный метод Ньютона
 
