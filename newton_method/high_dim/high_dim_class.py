@@ -65,6 +65,6 @@ class HighDimensionalIntervalNewtonProcess:
                     break
 
             # пересекаем интервалы
-            result = self.intersect(result, newt_iter
+            result = self.intersect(result, newt_iter)
 
         print(result)
