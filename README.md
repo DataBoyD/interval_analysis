@@ -17,5 +17,5 @@ $$x^{⋆} = x - \frac{f(x)}{f'(\xi)}$$
 <br />
 <br />
 Выполним интервализацию формулы
-$$x^{⋆} \in x - \frac{f(x)}{f'(\textbf{X})}$$,
+$$x^{⋆} \in x - \frac{f(x)}{f'(\textbf{X})},$$
 если $0 \notin f'(\textbf{X})$
