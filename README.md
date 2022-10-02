@@ -9,3 +9,7 @@
 
 Пусть задана функция $f : X \subseteq  \mathbb{R}  \rightarrow  \mathbb{R}$, имеющая нуль в точке $x^{⋆}$.<br />
 Тогда $$\forall x \in X \looparrowright f(x) - f(x^{⋆}) = f'(\xi)(x-x^{⋆})$$
+<br />
+<br />
+
+Так как $f(x^{⋆}) = 0 ⇒ f(x) = f'(ξ)(x-x^{⋆})$ 
