@@ -74,7 +74,7 @@ class IntervalExtensionFunction:
 
 class NewtonIntervalIterationProcess:
 
-    def __init__(self, f, first_der, primary_interval: Interval, domain, eps: float = 1e-3):
+    def __init__(self, f, first_der, primary_interval: Interval, domain, eps: float = 1e-20):
         self.f = f
         self.der = first_der
         self.primary_interval = primary_interval
@@ -106,13 +106,14 @@ class NewtonIntervalIterationProcess:
 
                 # в обычной ситуации действуем по привычному алгоритму
                 newt_iter = mid - self.f(mid) / self.der(result)
-
+                print(result)
                 # чтобы не допустить попадание None в массив результатов, добавляем данное условие
                 if intersection(result, newt_iter) is None:
                     break
 
                 result = intersection(result, newt_iter)
-                if result.width() < self.eps:
+
+                if result.width() <= self.eps:
                     self.domain.common_base.append(result)
 
 
@@ -121,7 +122,7 @@ class NewtonComputations:
 
     common_base = []
 
-    def __init__(self, f, first_der, primary_interval: Interval, eps: float = 1e-29):
+    def __init__(self, f, first_der, primary_interval: Interval, eps: float = 1e-20):
         self.f = f
         self.der = IntervalExtensionFunction(first_der)
         self.primary_interval = primary_interval
@@ -132,22 +133,18 @@ class NewtonComputations:
         nip.start()
 
 
-f = lambda x: x ** 67 - Decimal(0.5292992393494939439493444)
-der_f = lambda x: 67 * x ** 66
+f = lambda x: x ** 2 + 2 * x * Decimal(math.sin(x)) - 4
+der_f = lambda x: 2 * x + 2 * x.sin(x) + 2 * x * x.cos(x)
 
 
-# f = lambda x: x ** 2 + 2 * x + 1 - Decimal(math.sin(x ** 2))
-# der_f = lambda x: 2 * x + 2 - 2 * x * x.cos(x)
-
-
-a = Interval([-1, 1])
+a = Interval([-2, 2])
 # print(der_f(a))
 a.setprecision(40)
 
 
-n = NewtonComputations(f, der_f, a, eps=1e-35)
+n = NewtonComputations(f, der_f, a)
 n.run()
-
+print(f(a[0]))
 
 print(n.common_base)
 

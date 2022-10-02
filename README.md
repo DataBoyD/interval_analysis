@@ -1,3 +1,14 @@
+<style>
+   .leftimg {
+    float:left; /* Выравнивание по левому краю */
+    margin: 7px 7px 7px 0; /* Отступы вокруг картинки */
+   }
+   .rightimg  {
+    float: right; /* Выравнивание по правому краю  */ 
+    margin: 7px 0 7px 7px; /* Отступы вокруг картинки */
+   }
+  </style>
+
 # Метод Ньютона
 
 ## Одномерный метод Ньютона
@@ -30,3 +41,11 @@ $$\mathcal{N}(\textbf{X}, x) := x - \frac{f(x)}{f'(\textbf{X})}$$
 
 Общий вид итерационного процесса:
 $$\textbf{X}^{(k+1)} ← \textbf{X}^{(k)}\cap \mathcal{N}(x, \textbf{X})$$
+
+## Пример
+dfffdfdfd 
+<img src="newton_method/static/example.png" width="300" height="300" class="leftimg"/> 
+> Будем искать нули функции $$f(x) =  x^2 + 2x\sin{x}  -4$$
+
+
+
