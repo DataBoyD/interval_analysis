@@ -58,6 +58,8 @@ $$\mathcal{N}(\textbf{X}, \bar{x}) = \bar{x} - (J(x, \bar{x}))^{-1}×f(\bar{x})$
 <img src="newton_method/static/example_one_dim.png" height="450" width="800">
 
 ---
+Далее идут проверенные примеры из [книги](https://amd.spbstu.ru/userfiles/files/methodical_material/Intervalniy-analiz_-Osnovi-teorii-i-primeri-primeneniy.pdf)
+---
 
 #### II пример
 
