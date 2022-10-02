@@ -16,7 +16,20 @@ class IntervalExtensionFunction:
 
 class NewtonIntervalIterationProcess:
 
+
     def __init__(self, f, first_der, primary_interval: Interval, domain, eps: float = 1e-20):
+
+        """ Одномерный метод Ньютона в интервальном виде
+             Параметры:
+
+                f - одномерная функция в аналитическом виде (lambda-выражение) \n
+                first_der - первая производная f (lambda-выражение) \n
+                domain - хранилище данных (внутренняя переменная) \n
+                primary_value - начальное приближение \n
+                precision - точность вычислений \n
+             """
+
+
         self.f = f
         self.der = first_der
         self.primary_interval = primary_interval
