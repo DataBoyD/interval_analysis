@@ -35,8 +35,8 @@ $$\textbf{X}^{(k+1)} ← \textbf{X}^{(k)}\cap \mathcal{N}(x, \textbf{X})$$
 ## Пример
  
 
-Будем искать нули функции $$f(x) =  x^2 + 2x\sin{x}  -4$$
-<img src="newton_method/static/example.png">
+Будем искать нули функции $$f(x) =  x^2 + 2x\sin{x} - 4$$
+<img src="newton_method/static/example.png" />
 
 
 
