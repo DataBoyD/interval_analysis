@@ -42,3 +42,13 @@ $$\textbf{X}^{(k+1)} ← \textbf{X}^{(k)}\cap \mathcal{N}(x, \textbf{X})$$
 Многомерный интервальный оператор Ньютона можно записать в виде
 $$\mathcal{N}(\textbf{X}, \bar{x}) = \bar{x} - (J(x, \bar{x}))^{-1}×f(\bar{x})$$
 
+## Примеры
+
+### Одномерный случай
+
+
+<img src="newton_method/static/first_ex.png" height="500" width="800">
+
+### Многомерный случай
+
+<img src="newton_method/static/sec_ex.png" height="1200" width="800">
