@@ -47,6 +47,8 @@ $$\mathcal{N}(\textbf{X}, \bar{x}) = \bar{x} - (J(x, \bar{x}))^{-1}×f(\bar{x})$
 [ссылка 1](https://amd.spbstu.ru/userfiles/files/methodical_material/Intervalniy-analiz_-Osnovi-teorii-i-primeri-primeneniy.pdf)
 <br />
 [ссылка 2](http://conf.nsc.ru/files/conferences/niknik-90/fulltext/38161/47719/Lyadova1.pdf)
+<br />
+[ссылка 3](https://github.com/DataBoyD/interval_analysis/tree/newton-method/literature)
 
 ## Примеры
 
