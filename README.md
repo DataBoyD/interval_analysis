@@ -51,4 +51,5 @@ $$\mathcal{N}(\textbf{X}, \bar{x}) = \bar{x} - (J(x, \bar{x}))^{-1}×f(\bar{x})$
 
 ### Многомерный случай
 
-<img src="newton_method/static/sec_ex.png" height="1200" width="800">
+<img src="newton_method/static/sec_ex.png" height="800" width="800">
+<img src="newton_method/static/th_ex.png" height="450" width="800">
