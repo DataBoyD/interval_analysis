@@ -1,5 +1,17 @@
 # Метод Ньютона
 
+## Архитектура проекта
+
+[`interval_lib.py`](https://github.com/DataBoyD/interval_analysis/blob/newton-method/interval_lib.py) - библиотека для интервальных вычислений
+* [newton_method](https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method) - пакет с реализацией метода Ньютона
+    * [one_dim](https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method/one_dim) - одномерный метод Ньютона
+      * [`one_dim_class.py`](https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/one_dim/one_dim_class.py) - главный класс
+      * [`one_dim_ex.py`](https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/one_dim/one_dim_ex.py) - пример использования
+    * [high_dim](https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method/high_dim) - многомерный метод Ньютона
+      * [`high_dim_class.py`](https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/high_dim/high_dim_class.py) - главный класс
+      * [`high_dim_ex.py`](https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/high_dim/high_dim_ex.py) - пример использования
+      * [matrix_inversion](https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method/high_dim/matrix_inversion) - класс для обращения интервальных матриц
+
 ## Одномерный метод Ньютона
 
 ### ***Теорема Лагранжа (Формула конечных приращений)***
