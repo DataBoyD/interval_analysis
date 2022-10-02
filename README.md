@@ -1,13 +1,3 @@
-<style>
-   .leftimg {
-    float:left; /* Выравнивание по левому краю */
-    margin: 7px 7px 7px 0; /* Отступы вокруг картинки */
-   }
-   .rightimg  {
-    float: right; /* Выравнивание по правому краю  */ 
-    margin: 7px 0 7px 7px; /* Отступы вокруг картинки */
-   }
-  </style>
 
 # Метод Ньютона
 
@@ -46,7 +36,7 @@ $$\textbf{X}^{(k+1)} ← \textbf{X}^{(k)}\cap \mathcal{N}(x, \textbf{X})$$
  
 
 Будем искать нули функции $$f(x) =  x^2 + 2x\sin{x}  -4$$
-<img src="newton_method/static/example.png" width="300" height="300" class="leftimg"/> 
+<img src="newton_method/static/example.png" width="300" height="300"/> 
 
 
 
