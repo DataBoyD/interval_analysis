@@ -106,7 +106,7 @@ def intersection(a: Interval, b: Interval):
 
 class HightDimensionalIntervalNewtonProcess:
 
-    def __init__(self, f, jacobian, primary_value, precision = 1e-10):
+    def __init__(self, f, jacobian, primary_value, precision = 1e-15):
         self.f = f
         self.jacoby_matrix = jacobian
         self.primary_value = primary_value
@@ -128,37 +128,57 @@ class HightDimensionalIntervalNewtonProcess:
 
     def start(self):
         result = self.primary_value
-        while ~any([elem[0] is None for elem in result]) and all([elem[0].width() > self.eps for elem in result]):
+        while any([elem[0] is None for elem in result]) is False and all([elem[0].width() >= self.eps for elem in result]):
             jacobian_inv = MatrixInversion(self.jacoby_matrix(result))
             mid = self.get_middle_point(result)
             newt_iter = mid - jacobian_inv() @ self.f(mid)
             if any([elem[0] is None for elem in self.intersect(result, newt_iter)]):
-                break
+                    break
             result = self.intersect(result, newt_iter)
         print(result)
 
 
 f = lambda x: np.array([
-    [x[0][0] ** 2 + x[1][0] ** 2 - 1],
-    [x[0][0] - x[1][0]],
+    [x[0][0] ** 2 + x[1][0] ** 2 - Decimal(0.25)],
+    [x[0][0] - x[1][0] ** 3],
 ])
 
 jacobian = lambda x: np.array([
     [2 * x[0][0], 2 * x[1][0]],
-    [1, -1],
+    [1, -3 * x[1][0] ** 2],
 
 ])
 
+x_0_0 = Interval([Decimal(-0.5), Decimal(-(1e-10))])
+x_0_0.setprecision(40)
+x_0_1 = Interval([Decimal(-0.8),  Decimal(-(1e-10))])
+x_0_1.setprecision(40)
 
 x_0 = np.array([
-    Interval([0.2, 2]),
-    Interval([0.2, 2]),
+    x_0_0,
+    x_0_1,
+]).reshape(-1, 1)
 
+
+hdNewt = HightDimensionalIntervalNewtonProcess(f, jacobian, x_0, precision=1e-21)
+hdNewt.start()
+
+
+x_0_0 = Interval([Decimal(0.05), Decimal(0.2)])
+x_0_0.setprecision(40)
+x_0_1 = Interval([Decimal(0.4),  Decimal((.55))])
+x_0_1.setprecision(40)
+
+x_0 = np.array([
+    x_0_0,
+    x_0_1,
 ]).reshape(-1, 1)
 
 
 hdNewt = HightDimensionalIntervalNewtonProcess(f, jacobian, x_0)
 hdNewt.start()
+
+
 
 
 
