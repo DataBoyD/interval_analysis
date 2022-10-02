@@ -3,40 +3,7 @@ from math import sin
 
 
 from practice_interval.interval_lib import *
-
-i_1 = Interval([5, 500])
-i_2 = Interval([1, 2])
-
-
-def intersection(a: Interval, b: Interval):
-
-    # проверка на отсутствие пересечения интервалов
-    if (a[1] < b[0] and a[1] < b[1]) or (b[1] < a[0] and b[1] < a[1]):
-        return None
-
-    # проверка на нормальное пересечение
-    if a[0] < b[0] and a[1] < b[1]:
-        return Interval([b[0], a[1]])
-
-    # проверка на нормальное пересечение №2
-    if b[0] < a[0] and b[1] < a[1]:
-        return Interval([a[0], b[1]])
-
-    # проверка на вложенность
-    if a.isIn(b):
-        return a
-
-    # проверка на вложенность №2
-    if b.isIn(a):
-        return b
-
-    if a == b:
-        print("case 7")
-
-        return a
-
-
-# /////////////////////////////////////////////////////////////////////////////////////
+from intersection_tools import intersection
 
 
 class IntervalExtensionFunction:
@@ -81,7 +48,6 @@ class NewtonIntervalIterationProcess:
 
                 # в обычной ситуации действуем по привычному алгоритму
                 newt_iter = mid - self.f(mid) / self.der(result)
-                print(result)
                 # чтобы не допустить попадание None в массив результатов, добавляем данное условие
                 if intersection(result, newt_iter) is None:
                     break

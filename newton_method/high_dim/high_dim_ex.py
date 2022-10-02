@@ -4,11 +4,11 @@ from practice_interval.interval_lib import *
 from high_dim_class import HightDimensionalIntervalNewtonProcess
 
 
-
 f = lambda x: np.array([
     [x[0][0] ** 2 + x[1][0] ** 2 - Decimal(0.25)],
     [x[0][0] - x[1][0] ** 3],
 ])
+
 
 jacobian = lambda x: np.array([
     [2 * x[0][0], 2 * x[1][0]],
