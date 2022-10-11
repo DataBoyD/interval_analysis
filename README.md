@@ -42,8 +42,8 @@ $$\frac{df}{dx}(x) = \frac{1}{2}\cdot\frac{\sin{x}}{\sqrt{x}} - \sqrt{x}\cdot\co
 #### Функция №3
 
 
-$$f(x) = 1-e^{-x}\cdot\sin{2\cdot\pi\cdot x}$$
-$$\frac{df}{dx}(x) = e^{-x}\cdot\sin{2\cdot\pi\cdot x} - 2\pi\cdot e^{-x}\cdot\cos{2\pi\cdot x}$$
+$$f(x) = 1-e^{-x}\cdot\sin{(2\cdot\pi\cdot x)}$$
+$$\frac{df}{dx}(x) = e^{-x}\cdot\sin{(2\cdot\pi\cdot x)} - 2\pi\cdot e^{-x}\cdot\cos{(2\pi\cdot x)}$$
 Начальное приближение: $x^0 = [0.2, 7]$
 
 Первый нуль функции: $[3.01169077091179489575, 3.01169077120127206764]$
