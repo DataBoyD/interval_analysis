@@ -12,6 +12,11 @@
       * [`high_dim_ex.py`](https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/high_dim/high_dim_ex.py) - пример использования
       * [matrix_inversion](https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method/high_dim/matrix_inversion) - класс для обращения интервальных матриц
 
+
+## Тесты из книги
+TODO
+
+
 ## Одномерный метод Ньютона
 
 ### ***Теорема Лагранжа (Формула конечных приращений)***
