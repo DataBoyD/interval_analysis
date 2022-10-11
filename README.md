@@ -21,6 +21,7 @@
 
 
 $$f(x) = -0.5\cdot x^{2}\cdot\ln{x} + 5$$
+
 $$\frac{df}{dx}(x) = -x\cdot\ln{x} - 0.5\cdot x$$
 
 >
@@ -36,7 +37,9 @@ $$\frac{df}{dx}(x) = -x\cdot\ln{x} - 0.5\cdot x$$
 #### Функция №2
 
 $$f(x) = -\sqrt{x}\cdot\sin{x} + 1$$
+
 $$\frac{df}{dx}(x) = \frac{1}{2}\cdot\frac{\sin{x}}{\sqrt{x}} - \sqrt{x}\cdot\cos{x}$$
+
 
 >
 > **Начальное приближение**: $x^0 = [0.2, 7]$
@@ -52,6 +55,7 @@ $$\frac{df}{dx}(x) = \frac{1}{2}\cdot\frac{\sin{x}}{\sqrt{x}} - \sqrt{x}\cdot\co
 
 
 $$f(x) = 1-e^{-x}\cdot\sin{(2\pi\cdot x)}$$
+
 $$\frac{df}{dx}(x) = e^{-x}\cdot\sin{(2\pi\cdot x)} - 2\pi\cdot e^{-x}\cdot\cos{(2\pi\cdot x)}$$
 
 >
