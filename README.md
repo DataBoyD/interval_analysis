@@ -29,6 +29,9 @@ $$\frac{df}{dx}(x) = -x\cdot\ln{x} - 0.5\cdot x$$
 Точность вычислений: $\varepsilon = 10^{-6}$
 
 ---
+#### Функция №2
+
+---
 
 $$f(x) = -0.5\cdot x^{2}\cdot\ln{x} + 5$$
 $$\frac{df}{dx}(x) = -x\cdot\ln{x} - 0.5\cdot x$$
