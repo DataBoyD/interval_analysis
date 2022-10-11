@@ -83,17 +83,11 @@ class NewtonIntervalIterationProcess:
                 if result.width() <= self.eps and Interval([0, 0]).isIn(self.func_ext(result)):
                     self.domain.common_base.append(result)
                     break
-        # else:
-        #     if result is not None:
-        #         if result.width() <= self.eps and Interval([0, 0]).isIn(self.func_ext(result)):
-        #             if len(self.domain.common_base) == 0:
-        #                 self.domain.common_base.append(result)
-        #             for item in self.domain.common_base:
-        #                 if abs(item[0] - result[0]) > 1e-1:
-        #                     self.domain.common_base.append(result)
-        #                     return
-
-
+        else:
+            if result is not None:
+                if result.width() <= self.eps and Interval([0, 0]).isIn(self.func_ext(result)):
+                    if len(self.domain.common_base) == 0:
+                        self.domain.common_base.append(result)
 
 
 # аккумулирующий класс с хранилищем результатов итерационных процессов

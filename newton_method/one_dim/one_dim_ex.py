@@ -64,7 +64,7 @@ class Function:
         return self.f(x)
 
 
-a = Interval([1.3, 1.45])
+a = Interval([0.06, 7])
 a.setprecision(40)
 
 x = Symbol('x')
@@ -136,20 +136,22 @@ F = [
 
     # f = -x + sin(3*x)+1
 ]
-F = [
-    ((x + 1) ** 3) / (x ** 2) - 7.1
-
-]
+# F = [
+#     # ((x + 1) ** 3) / (x ** 2) - 7.1,
+#     # (x+sin(x))*exp(-x**2) + 0.8,
+#     (x ** 2 - 5 * x + 6) / (x ** 2 + 1) - 0.5
+#
+# ]
 
 
 def print_result(f, primary: Interval):
     der = diff(f, x)
-    # print(f, der)
+    print("DERIVATIVE: ", der)
     # print(0 in a)
     func = Function(f)
     der_f = IntervalExtension(der)
     f_ext = IntervalExtension(f)
-    n = NewtonComputations(func, f_ext, der_f, primary, eps=1e-3)
+    n = NewtonComputations(func, f_ext, der_f, primary, eps=1e-4)
     n.common_base.clear()
     n.run()
     if len(n.common_base) != 0:
