@@ -65,6 +65,7 @@ $$\frac{df}{dx}(x) = e^{-x}\cdot\sin{(2\pi\cdot x)} - 2\pi\cdot e^{-x}\cdot\cos{
 
 
 $$f(x) = x\cdot\sin{x} - 0.84\cdot x + \ln{x} + \sin{\frac{10x}{3}} + 1.3$$
+
 $$\frac{df}{dx}(x) = x\cdot\cos{x}+\sin{x}+\frac{10}{3}\cdot\cos{\frac{10x}{3}}-0.84+\frac{1}{x}$$
 
 >
