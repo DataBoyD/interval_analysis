@@ -173,7 +173,7 @@ $$\frac{df}{dx}(x) = 18(3x-1.4)\cos{18x}+3\sin{18x}$$
 #### Функция №12
 
 
-$$f(x) = \sum_{k=1}^{5} k\cdot\cos{[(k+1)x + k]} + 12$$
+$$f(x) = \sum_{k=0}^{5} k\cdot\cos{[(k+1)x + k]} + 12$$
 
 $$\frac{df}{dx}(x) = -\sum_{k=1}^{5}(k+1)\cdot\sin{[(k+1)x + k]}$$
 
