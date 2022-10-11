@@ -330,7 +330,7 @@ $$\frac{df}{dx}(x) = \frac{\ln{2x}}{x} + \frac{\ln{3x}}{x}$$
 
 $$f(x) = 0.5 - e^{-x}\cdot\sin{2\pi x}$$
 
-$$\frac{df}{dx}(x) = e^{-x}\cdot\sin{2\pi x} - 2\pi \cdot e^{-x}\cdot\cos{2\pi x}$$
+$$\frac{d}{dx}f = e^{-x}\cdot\sin{2\pi x} - 2\pi \cdot e^{-x}\cdot\cos{2\pi x}$$
 
 >
 > **Начальное приближение**: $x^0 = [0.05, 7]$
