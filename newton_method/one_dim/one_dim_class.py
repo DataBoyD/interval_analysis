@@ -71,10 +71,10 @@ class NewtonIntervalIterationProcess:
 
                 # в обычной ситуации действуем по привычному алгоритму
                 newt_iter = mid - Decimal(float(self.f(float(mid)))) / self.der(result)
+
                 # чтобы не допустить попадание None в массив результатов, добавляем данное условие
                 if intersection(result, newt_iter) is None:
-                    if result.width() <= self.eps and Interval([0,0]).isIn(self.func_ext(result)):
-                        print("Add!")
+                    if result.width() <= self.eps and Interval([0, 0]).isIn(self.func_ext(result)):
                         self.domain.common_base.append(result)
                     break
 
@@ -88,6 +88,7 @@ class NewtonIntervalIterationProcess:
                 if result.width() <= self.eps and Interval([0, 0]).isIn(self.func_ext(result)):
                     if len(self.domain.common_base) == 0:
                         self.domain.common_base.append(result)
+                        return
 
 
 # аккумулирующий класс с хранилищем результатов итерационных процессов
