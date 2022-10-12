@@ -6,6 +6,8 @@ from sympy.utilities.lambdify import implemented_function
 
 from one_dim_class import NewtonComputations
 from practice_interval.interval_lib import Interval
+from practice_interval.newton_method.one_dim.symbolic_package.symbolic_interval_extension import IntervalExtension
+from practice_interval.newton_method.one_dim.symbolic_package.symbolic_function_representation import Function
 
 f = lambda x: x ** 2 + 2 * x * Decimal(math.sin(x)) - 4
 der_f = lambda x: 2 * x + 2 * x.sin(x) + 2 * x * x.cos(x)
@@ -32,36 +34,7 @@ a.setprecision(25)
 # print(n.common_base)
 
 
-class IntervalExtension:
-    '''
-    Класс для построения функции, принимающей в качестве аргумента интервал
-    '''
 
-    def __init__(self, f):
-        self.f = f
-        self.__evaluate_interval_expresion()
-
-    def __evaluate_interval_expresion(self):
-        s = str(self.f)
-        s = s.replace("cos(", "x.cos(")
-        s = s.replace("sin(", "x.sin(")
-        s = s.replace("log(", "x.ln(")
-        s = s.replace("exp(", "x.exp(")
-        s = s.replace("pi", "Decimal(math.pi)")
-        self.f = lambda x: eval(s)
-
-    def __call__(self, x: Interval):
-        return self.f(x)
-
-
-class Function:
-
-    def __init__(self, f):
-        f = str(f)
-        self.f = lambda x: eval(f)
-
-    def __call__(self, x):
-        return self.f(x)
 
 
 a = Interval([0.2, 7])

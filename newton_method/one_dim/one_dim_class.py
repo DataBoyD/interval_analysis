@@ -1,6 +1,7 @@
 import math
 from math import sin
 from sys import setrecursionlimit
+from decimal import Decimal
 
 
 setrecursionlimit(20000)
