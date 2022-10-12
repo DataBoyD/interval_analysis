@@ -64,8 +64,8 @@ class Function:
         return self.f(x)
 
 
-a = Interval([0.06, 7])
-a.setprecision(40)
+a = Interval([0.2, 7])
+a.setprecision(20)
 
 x = Symbol('x')
 # f = (-0.5 * x ** 2) * log(x) + 5
@@ -113,8 +113,6 @@ F = [
     2 * cos(x) + cos(2 * x) + 5,
     2 * sin(x) * exp(-x),
     (3 * x - 1.4) * sin(18 * x) + 1.7,
-    # error!!!
-    # f = ((x + 1) ** 3) / (x ** 2) - 7.1
     exp(sin(3 * x)),
     sum([k * cos(x * (k + 1) + k) for k in range(0, 6)]) + 12,
     2 * (x - 3) ** 2 - exp(x / 2) + 5,
@@ -128,8 +126,11 @@ F = [
     log(3 * x) * log(2 * x) - 1,
     -exp(-x) * sin(2 * pi * x) + 0.5,
     (x + sin(x)) * exp(-x ** 2) + 0.8,
-    # (x ** 2 - 5 * x + 6) / (x ** 2 + 1) - 0.5,
-    - x + sin(3 * x) + 1
+    - x + sin(3 * x) + 1,
+    -exp(sin(3 * x)) + 1,
+    ((x + 1) ** 3) / (x ** 2) - 7.1,
+
+    # -exp(sin(3*x))+1
     # f = (x+sin(x))*exp(-x**2) + 0.8  # r!!!
     # f = (x**2-5*x+6)/(x**2 + 1) - 0.5
     # f = (x+sin(x))*exp(-x**2) + 0.8
@@ -139,7 +140,20 @@ F = [
 # F = [
 #     # ((x + 1) ** 3) / (x ** 2) - 7.1,
 #     # (x+sin(x))*exp(-x**2) + 0.8,
-#     (x ** 2 - 5 * x + 6) / (x ** 2 + 1) - 0.5
+#     # (x ** 2 - 5 * x + 6) / (x ** 2 + 1) - 0.5
+#     -exp(sin(3 * x)) + 1
+#
+# ]
+
+# F = [
+#     # ((x + 1) ** 3) / (x ** 2) - 7.1,
+#     # (x+sin(x))*exp(-x**2) + 0.8,
+#     # sum([k * cos(x * (k + 1) + k) for k in range(0, 6)]) + 12,
+#     #
+#     # -sum([k * sin(x * (k + 1) + k) for k in range(1, 6)]) + 3,
+#     # -sum([cos(x * (k + 1)) for k in range(1, 6)]),
+#     ((x + 1) ** 3) / (x ** 2) - 7.1,
+#     # (x ** 2 - 5 * x + 6) / (x ** 2 + 1) - 0.5
 #
 # ]
 
@@ -151,13 +165,14 @@ def print_result(f, primary: Interval):
     func = Function(f)
     der_f = IntervalExtension(der)
     f_ext = IntervalExtension(f)
-    n = NewtonComputations(func, f_ext, der_f, primary, eps=1e-4)
+    n = NewtonComputations(func, f_ext, der_f, primary, eps=1e-5)
     n.common_base.clear()
     n.run()
     if len(n.common_base) != 0:
-        print(sorted(n.common_base, key=lambda x: x[0])[0])
+        print(sorted(n.common_base, key=lambda x: x[0]))
 
 
 for idx, f in enumerate(F):
     print(f"Функция #{idx + 1}: {f}")
     print_result(f, a)
+
