@@ -1,5 +1,7 @@
 # Метод Ньютона
 
+[menu](#функция-1)
+
 ## Архитектура проекта
 
 [`interval_lib.py`](https://github.com/DataBoyD/interval_analysis/blob/newton-method/interval_lib.py) - библиотека для интервальных вычислений
