@@ -12,7 +12,7 @@ from practice_interval.newton_method.one_dim.symbolic_package.symbolic_function_
 f = lambda x: x ** 2 + 2 * x * Decimal(math.sin(x)) - 4
 der_f = lambda x: 2 * x + 2 * x.sin(x) + 2 * x * x.cos(x)
 
-a = Interval([-2, 2])
+a = Interval([-10, 10])
 a.setprecision(40)
 
 # n = NewtonComputations(f, der_f, a)
@@ -24,7 +24,7 @@ a.setprecision(40)
 f = lambda x: x ** 2 + 2 * x * Decimal(math.sin(x)) - 4
 der_f = lambda x: 2 * x + 2 * x.sin(x) + 2 * x * x.cos(x)
 
-a = Interval([1, 2])
+a = Interval([1, 7])
 a.setprecision(25)
 
 
@@ -37,8 +37,8 @@ a.setprecision(25)
 
 
 
-a = Interval([0.2, 7])
-a.setprecision(20)
+a = Interval([-3,2])
+a.setprecision(40)
 
 x = Symbol('x')
 # f = (-0.5 * x ** 2) * log(x) + 5
@@ -118,21 +118,25 @@ F = [
 #
 # ]
 
-# F = [
-#     # ((x + 1) ** 3) / (x ** 2) - 7.1,
+F = [
+#     ((x + 1) ** 3) / (x ** 2) - 7.1,
 #     # (x+sin(x))*exp(-x**2) + 0.8,
 #     # sum([k * cos(x * (k + 1) + k) for k in range(0, 6)]) + 12,
 #     #
-#     # -sum([k * sin(x * (k + 1) + k) for k in range(1, 6)]) + 3,
-#     # -sum([cos(x * (k + 1)) for k in range(1, 6)]),
-#     ((x + 1) ** 3) / (x ** 2) - 7.1,
-#     # (x ** 2 - 5 * x + 6) / (x ** 2 + 1) - 0.5
-#
-# ]
+    -sum([k * sin(x * (k + 1) + k) for k in range(1, 6)]) + 3,
+    -sum([cos(x * (k + 1)) for k in range(1, 6)]),
+#     # ((x + 1) ** 3) / (x ** 2) - 7.1,
+#     # cos(x) + 2*cos(2*x)*exp(-x)
+    (x ** 2 - 5 * x + 6) / (x ** 2 + 1) - 0.5,
+    -exp(sin(3 * x)) + 1
+
+
+]
 
 
 def print_result(f, primary: Interval):
-    der = diff(f, x)
+    # Проблема состояла в неоптимальном интервальном расширении производной!!!
+    der = diff(f, x).simplify()
     print("DERIVATIVE: ", der)
     # print(0 in a)
     func = Function(f)
@@ -143,9 +147,12 @@ def print_result(f, primary: Interval):
     n.run()
     if len(n.common_base) != 0:
         print(sorted(n.common_base, key=lambda x: x[0]))
+        print()
 
 
 for idx, f in enumerate(F):
     print(f"Функция #{idx + 1}: {f}")
     print_result(f, a)
+    print()
+
 
