@@ -1,10 +1,14 @@
+import datetime
 from decimal import Decimal
 import math
+from typing import List
+
 from sympy import *
 from sympy.abc import x
 from sympy.utilities.lambdify import implemented_function
 
 from one_dim_class import NewtonComputations
+from practice_interval.csv_adapter.csv_writer import NewtonRecord, CSVWriter
 from practice_interval.interval_lib import Interval
 from practice_interval.newton_method.one_dim.symbolic_package.symbolic_interval_extension import IntervalExtension
 from practice_interval.newton_method.one_dim.symbolic_package.symbolic_function_representation import Function
@@ -24,7 +28,7 @@ a.setprecision(40)
 f = lambda x: x ** 2 + 2 * x * Decimal(math.sin(x)) - 4
 der_f = lambda x: 2 * x + 2 * x.sin(x) + 2 * x * x.cos(x)
 
-a = Interval([1, 7])
+a = Interval([0.2, 7])
 a.setprecision(25)
 
 
@@ -37,8 +41,8 @@ a.setprecision(25)
 
 
 
-a = Interval([-3,2])
-a.setprecision(40)
+a = Interval([0.2,7])
+a.setprecision(20)
 
 x = Symbol('x')
 # f = (-0.5 * x ** 2) * log(x) + 5
@@ -118,20 +122,28 @@ F = [
 #
 # ]
 
-F = [
-#     ((x + 1) ** 3) / (x ** 2) - 7.1,
-#     # (x+sin(x))*exp(-x**2) + 0.8,
-#     # sum([k * cos(x * (k + 1) + k) for k in range(0, 6)]) + 12,
-#     #
-    -sum([k * sin(x * (k + 1) + k) for k in range(1, 6)]) + 3,
-    -sum([cos(x * (k + 1)) for k in range(1, 6)]),
-#     # ((x + 1) ** 3) / (x ** 2) - 7.1,
-#     # cos(x) + 2*cos(2*x)*exp(-x)
-    (x ** 2 - 5 * x + 6) / (x ** 2 + 1) - 0.5,
-    -exp(sin(3 * x)) + 1
+# F = [
+# #     ((x + 1) ** 3) / (x ** 2) - 7.1,
+# #     # (x+sin(x))*exp(-x**2) + 0.8,
+# #     # sum([k * cos(x * (k + 1) + k) for k in range(0, 6)]) + 12,
+# #     #
+#     x ** (0.5) * (sin(x)) ** 2,
+#
+#     # -sum([k * sin(x * (k + 1) + k) for k in range(1, 6)]) + 3,
+#     # -sum([cos(x * (k + 1)) for k in range(1, 6)]),
+# #     # ((x + 1) ** 3) / (x ** 2) - 7.1,
+# #     # cos(x) + 2*cos(2*x)*exp(-x)
+# #     (x ** 2 - 5 * x + 6) / (x ** 2 + 1) - 0.5,
+# #     -exp(sin(3 * x)) + 1
+#
+#
+# ]
 
+PATH = "csv_adapter/tests"
 
-]
+writer = CSVWriter(path=f"{PATH}/{datetime.datetime.now()}.csv")
+# writer = CSVWriter(path=f"{datetime.datetime.now()}.csv")
+NewtonRecordJournal: List[NewtonRecord] = []
 
 
 def print_result(f, primary: Interval):
@@ -145,9 +157,24 @@ def print_result(f, primary: Interval):
     n = NewtonComputations(func, f_ext, der_f, primary, eps=1e-5)
     n.common_base.clear()
     n.run()
+    rec = NewtonRecord(
+        str(f),
+        str(der),
+        a,
+        1e-5,
+        ""
+    )
+
     if len(n.common_base) != 0:
         print(sorted(n.common_base, key=lambda x: x[0]))
         print()
+        roots = "\n".join([str(r) for r in n.common_base])
+        rec.roots = roots
+
+    NewtonRecordJournal.append(rec)
+    print(rec)
+
+
 
 
 for idx, f in enumerate(F):
@@ -155,4 +182,6 @@ for idx, f in enumerate(F):
     print_result(f, a)
     print()
 
+
+writer.save(NewtonRecordJournal)
 
