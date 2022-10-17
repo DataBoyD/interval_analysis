@@ -4,11 +4,16 @@ from sys import setrecursionlimit
 from decimal import Decimal
 
 
-setrecursionlimit(20000)
 
 
 from practice_interval.interval_lib import *
 from intersection_tools import intersection
+
+setrecursionlimit(20000)
+
+#TODO: если середина непредставима (ошибки округления),
+# то необходимо использовать 'интервалозначную' середину
+
 
 
 class IntervalExtensionFunction:
@@ -43,10 +48,14 @@ class NewtonIntervalIterationProcess:
         self.domain = domain
 
     def start(self):
+
         result = self.primary_interval
 
         # сам итерационный процесс
         while result != None and result.width() > self.eps:
+            # print(f"RESULT: {result}\n"
+            #       f"WIDTH: {result.width()}\n"
+            #       f"EPS: {self.eps}")
 
             # вычисляем середину интервала $$\Tilde{x}$$
             mid = (result[0] + result[1]) / 2
@@ -60,6 +69,7 @@ class NewtonIntervalIterationProcess:
                 # обрабатываем каждый луч отдельно (запускаем для них отдельные итерационные процессы)
                 for i in division:
                     newt_iter = mid - Decimal(float(self.f(float(mid)))) * i
+
                     t = NewtonIntervalIterationProcess(self.f,
                                                        self.func_ext,
                                                        self.der,
@@ -84,12 +94,6 @@ class NewtonIntervalIterationProcess:
                 if result.width() <= self.eps and Interval([0, 0]).isIn(self.func_ext(result)):
                     self.domain.common_base.append(result)
                     break
-        else:
-            if result is not None:
-                if result.width() <= self.eps and Interval([0, 0]).isIn(self.func_ext(result)):
-                    if len(self.domain.common_base) == 0:
-                        self.domain.common_base.append(result)
-                        return
 
 
 # аккумулирующий класс с хранилищем результатов итерационных процессов
