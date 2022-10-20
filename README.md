@@ -36,6 +36,14 @@
 Сейчас реализация такова, что:
 $$|(\mathcal{F}_x, \mathcal{F}_c, \mathcal{F}_s)| = (|(\mathcal{F}_x|, |(\mathcal{F}_c|, \mathcal{F}_s)$$
 
+#### Как определить интервальный скос для тригонометрических функций?
+<img src="newton_method/static/article_shortcut.png" height="800" width="800">
+
+
+Сейчас реализация такова, что:
+$$|(\mathcal{F}_x, \mathcal{F}_c, \mathcal{F}_s)| = (|(\mathcal{F}_x|, |(\mathcal{F}_c|, \mathcal{F}_s)$$
+
+
 [//]: # (## Тесты из [книги]&#40;literature/Casado_roots.pdf&#41;)
 
 [//]: # (### Дифференцируемые функции)
