@@ -34,7 +34,7 @@
 #### Как определить модуль от тройки объектов, указанных в литературе?
 
 Сейчас реализация такова, что:
-$$ |(\mathcla{F}_x, \mathcal{F}_c, \mathcal{F}_s)| = (|(\mathcla{F}_x|, |(\mathcla{F}_c|, \mathcla{F}_s) $$
+$$|(\mathcla{F}_x, \mathcal{F}_c, \mathcal{F}_s)| = (|(\mathcla{F}_x|, |(\mathcla{F}_c|, \mathcla{F}_s)$$
 
 [//]: # (## Тесты из [книги]&#40;literature/Casado_roots.pdf&#41;)
 
