@@ -19,7 +19,8 @@
       * [matrix_inversion](https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method/high_dim/matrix_inversion) - класс для обращения интервальных матриц
 
 
-## Тесты из [книги](literature/Casado_roots.pdf)
+
+[//]: # (## Тесты из [книги]&#40;literature/Casado_roots.pdf&#41;)
 
 [//]: # (### Дифференцируемые функции)
 
