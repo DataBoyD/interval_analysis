@@ -215,6 +215,19 @@ class Func:
 #     # fff = lambda x: ((x + 1) ** 3) / (x ** 2) - 7.1
 #     # print(fff(Decimal(1)))
 
+def sigma_oper(arr):
+    result = arr[0]
+    for i in range(1, len(arr)):
+        result = result + arr[i]
+    return result
+
+def f1(x):
+    if isinstance(x, Triplet):
+        return sigma_oper([Triplet.from_number(k) * triplet_cos(Triplet.from_number(k+1) * x + Triplet.from_number(k))  for k in range(0, 6)]) + Triplet.from_number(12)
+    else:
+        return sigma_oper([k * Decimal(math.cos(x * (k + 1) + k)) for k in range(0, 6)]) + 12
+
+
 F = [
     Func("(x+1)^3/x^2-7.1", lambda x: ((x + Triplet.from_number(1)) ** 3) / (x ** 2) - Triplet.from_number(7.1) if isinstance(x, Triplet) else ((x + Decimal(1)) ** 3) / (x ** 2) - Decimal(7.1)),
     Func("(x^2-5x+6)/(x^2+1)-0.5", lambda x: (x ** 2 - Triplet.from_number(5) * x + Triplet.from_number(6)) / (x ** 2 + Triplet.from_number(1)) - Triplet.from_number(0.5) if isinstance(x, Triplet) else (x ** 2 - 5 * x + 6) / (x ** 2 + 1) - Decimal(0.5)),
@@ -233,6 +246,10 @@ F = [
     Func("x*|sin(x)| + 6",lambda x: x * abs(triplet_sin(x)) + Triplet.from_number(6) if isinstance(x, Triplet) else x * abs(Decimal(math.sin(x))) + Decimal(6)),
     Func("|x*sin(x)|-1.5", lambda x: abs(x * triplet_sin(x)) - Triplet.from_number(1.5) if isinstance(x, Triplet) else abs(x * Decimal(math.sin(x))) - Decimal(1.5)),
     Func("-exp(sin(3x))+1", lambda x: -triplet_exp(triplet_sin(Triplet.from_number(3) * x)) + Triplet.from_number(1) if isinstance(x,Triplet) else -math.exp(math.sin(3 * x)) + 1),
+    Func("exp(x^2)-2", lambda x: triplet_exp(x ** 2) - Triplet.from_number(2) if isinstance(x,Triplet) else Decimal(math.exp(x ** 2)) - 2),
+    Func("2/100*x^2 - 3/100*exp(-20*(x-0.875)^2)", lambda x: Triplet.from_number(2/100)*x**2 - Triplet.from_number(3/100)*triplet_exp(-Triplet.from_number(20)*(x-Triplet.from_number(0.875))**2) if isinstance(x, Triplet) else Decimal((2/100))*x**2 - Decimal((3/100))*Decimal(math.exp(-20*(x-Decimal(0.875))**2))),
+    Func("sum([k * cos(x * (k + 1) + k) for k in range(0, 6)]) + 12)", lambda x: f1(x)),
+    # Func("x^6-15x^4+27x^3+250", lambda x: x**6 - Triplet.from_number(15)*x**4 + Triplet.from_number(27)*x**3+Triplet.from_number(250) if isinstance(x,Triplet) else x**6 - 15 * x**4 + 27 * x**3 + 250),
 ]
 
 PATH = "csv_adapter/tests/slope_tests"
@@ -250,7 +267,7 @@ def print_result_slope(f, primary: Interval):
     # der_f = IntervalExtension(der)
     # f_ext = IntervalExtension(f)
 
-    n = NewtonComputations(f, f, der_f, primary, eps=1e-4)
+    n = NewtonComputations(f, f, der_f, primary, eps=1e-5)
     n.common_base.clear()
     n.run_slope()
     rec = NewtonRecord(
