@@ -6,19 +6,35 @@
 [//]: # ([Функция №2]&#40;#функция-2&#41;)
 
 
-## Архитектура проекта
+[//]: # (## Архитектура проекта)
 
-[`interval_lib.py`](https://github.com/DataBoyD/interval_analysis/blob/newton-method/interval_lib.py) - библиотека для интервальных вычислений
-* [newton_method](https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method) - пакет с реализацией метода Ньютона
-    * [one_dim](https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method/one_dim) - одномерный метод Ньютона
-      * [`one_dim_class.py`](https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/one_dim/one_dim_class.py) - главный класс
-      * [`one_dim_ex.py`](https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/one_dim/one_dim_ex.py) - пример использования
-    * [high_dim](https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method/high_dim) - многомерный метод Ньютона
-      * [`high_dim_class.py`](https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/high_dim/high_dim_class.py) - главный класс
-      * [`high_dim_ex.py`](https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/high_dim/high_dim_ex.py) - пример использования
-      * [matrix_inversion](https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method/high_dim/matrix_inversion) - класс для обращения интервальных матриц
+[//]: # ()
+[//]: # ([`interval_lib.py`]&#40;https://github.com/DataBoyD/interval_analysis/blob/newton-method/interval_lib.py&#41; - библиотека для интервальных вычислений)
 
+[//]: # (* [newton_method]&#40;https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method&#41; - пакет с реализацией метода Ньютона)
 
+[//]: # (    * [one_dim]&#40;https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method/one_dim&#41; - одномерный метод Ньютона)
+
+[//]: # (      * [`one_dim_class.py`]&#40;https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/one_dim/one_dim_class.py&#41; - главный класс)
+
+[//]: # (      * [`one_dim_ex.py`]&#40;https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/one_dim/one_dim_ex.py&#41; - пример использования)
+
+[//]: # (    * [high_dim]&#40;https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method/high_dim&#41; - многомерный метод Ньютона)
+
+[//]: # (      * [`high_dim_class.py`]&#40;https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/high_dim/high_dim_class.py&#41; - главный класс)
+
+[//]: # (      * [`high_dim_ex.py`]&#40;https://github.com/DataBoyD/interval_analysis/blob/newton-method/newton_method/high_dim/high_dim_ex.py&#41; - пример использования)
+
+[//]: # (      * [matrix_inversion]&#40;https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method/high_dim/matrix_inversion&#41; - класс для обращения интервальных матриц)
+
+## Версия одномерного алгоритма Ньютона, использующего для интервальной оценки производной интервальный скос (`slope`)
+
+### Проблемы, возникшие при реализации:
+
+#### Как определить модуль от тройки объектов, указанных в литературе?
+
+Сейчас реализация такова, что:
+$$ |(\mathcla{F}_x, \mathcal{F}_c, \mathcal{F}_s)| = (|(\mathcla{F}_x|, |(\mathcla{F}_c|, \mathcla{F}_s) $$
 
 [//]: # (## Тесты из [книги]&#40;literature/Casado_roots.pdf&#41;)
 
