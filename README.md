@@ -28,6 +28,7 @@
 [//]: # (      * [matrix_inversion]&#40;https://github.com/DataBoyD/interval_analysis/tree/newton-method/newton_method/high_dim/matrix_inversion&#41; - класс для обращения интервальных матриц)
 
 ## Версия одномерного алгоритма Ньютона, использующего для интервальной оценки производной интервальный скос (`slope`)
+### **Тесты**
 Примеры прогона функций с вычислением скоса можно найти [здесь](csv_adapter/tests/slope_tests) (csv бенчмарки)
 Примеры прогона функций с символьными вычислениями можно найти [здесь](csv_adapter/tests) (csv бенчмарки)
 
