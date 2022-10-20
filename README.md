@@ -36,6 +36,11 @@
 Сейчас реализация такова, что:
 $$|(\mathcal{F}_x, \mathcal{F}_c, \mathcal{F}_s)| = (|(\mathcal{F}_x|, |(\mathcal{F}_c|, \mathcal{F}_s)$$
 
+Пример проблемы:
+
+<img src="newton_method/static/img.png" height="300" width="700">
+
+
 #### Как определить интервальный скос для тригонометрических функций?
 В оригинальной [статье](literature/download.pdf) указано, что формулы ниже могут быть использованы для других функций но с соответствующими ограничениями
 
@@ -43,10 +48,16 @@ $$|(\mathcal{F}_x, \mathcal{F}_c, \mathcal{F}_s)| = (|(\mathcal{F}_x|, |(\mathca
 <img src="newton_method/static/article_shortcut.png" height="200" width="600">
 <img src="newton_method/static/remark.png" height="100" width="600">
 
+Проблема с выпуклостью тригонометрических функций остаётся открытой, сейчас для расчёта скоса используется некоторый "костыль"
 
-Сейчас реализация такова, что:
-$$|(\mathcal{F}_x, \mathcal{F}_c, \mathcal{F}_s)| = (|(\mathcal{F}_x|, |(\mathcal{F}_c|, \mathcal{F}_s)$$
-
+```
+return Triplet(
+        value_at_c=triplet.point.sin(triplet.point),
+        slope=triplet.interval.cos(triplet.interval) * triplet.slope,
+        # slope=slope * triplet.slope, <--- должно быть вот так, где slope посчитан по одной из формул выше
+        interval=triplet.interval.sin(triplet.interval)
+    )
+```
 
 [//]: # (## Тесты из [книги]&#40;literature/Casado_roots.pdf&#41;)
 
