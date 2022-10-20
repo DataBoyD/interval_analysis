@@ -26,7 +26,7 @@ class CSVWriter:
         ]
 
     def save(self, journal: List[NewtonRecord]):
-        with open(self.path, mode="w") as f:
+        with open(self.path, mode="a") as f:
             f = DictWriter(f, fieldnames=self.header)
             f.writeheader()
             for idx, rec in enumerate(journal):
