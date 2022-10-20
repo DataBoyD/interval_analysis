@@ -38,7 +38,7 @@
 #### Как определить модуль от тройки объектов, указанных в литературе?
 
 Сейчас реализация такова, что:
-$$|(\mathcal{F}_x, \mathcal{F}_c, \mathcal{F}_s)| = (|(\mathcal{F}_x|, |(\mathcal{F}_c|, \mathcal{F}_s)$$
+$$|(\mathcal{F}_x, \mathcal{F}_c, \mathcal{F}_s)| = (|(\mathcal{F}_x|, |\mathcal{F}_c|, \mathcal{F}_s)$$
 
 Пример проблемы:
 
@@ -761,6 +761,7 @@ $$\mathcal{N}(\textbf{X}, \bar{x}) = \bar{x} - (J(x, \bar{x}))^{-1}×f(\bar{x})$
 [ссылка 2](http://conf.nsc.ru/files/conferences/niknik-90/fulltext/38161/47719/Lyadova1.pdf)
 <br />
 [ссылка 3](https://github.com/DataBoyD/interval_analysis/tree/newton-method/literature)
+
 
 ## Примеры
 
