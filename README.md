@@ -37,10 +37,11 @@
 $$|(\mathcal{F}_x, \mathcal{F}_c, \mathcal{F}_s)| = (|(\mathcal{F}_x|, |(\mathcal{F}_c|, \mathcal{F}_s)$$
 
 #### Как определить интервальный скос для тригонометрических функций?
-В оригинальной [статье](literature/download.pdf)
+В оригинальной [статье](literature/download.pdf) указано, что формулы ниже могут быть использованы для других функций но с соответствующими ограничениями
 
 
 <img src="newton_method/static/article_shortcut.png" height="200" width="600">
+<img src="newton_method/static/remark.png" height="200" width="600">
 
 
 Сейчас реализация такова, что:
