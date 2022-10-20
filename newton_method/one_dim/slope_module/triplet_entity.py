@@ -20,7 +20,7 @@ class Triplet:
 
     @classmethod
     def from_number(cls, point: Decimal):
-        return Triplet(Interval.valueToInterval(point), Interval.valueToInterval(point), 0)
+        return Triplet(Interval.valueToInterval(point), Interval.valueToInterval(point), Interval.valueToInterval(0))
 
     def __str__(self):
         return f"Triplet<interval={self.interval}, point={self.point}, slope={self.slope}>"
