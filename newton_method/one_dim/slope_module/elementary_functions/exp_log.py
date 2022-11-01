@@ -6,7 +6,6 @@ from practice_interval.newton_method.one_dim.slope_module.triplet_entity import 
 def triplet_exp(triplet: Triplet):
     """
       Вычисление показательной функции от тройки объектов [Triplet]
-
       :param triplet:
       :return: Triplet
       """
@@ -27,7 +26,6 @@ def triplet_exp(triplet: Triplet):
 def triplet_log(triplet: Triplet):
     """
       Вычисление натурального логарифма от тройки объектов [Triplet]
-
       :param triplet:
       :return: Triplet
       """
@@ -43,4 +41,3 @@ def triplet_log(triplet: Triplet):
         slope=slope * triplet.slope,
         interval=triplet.interval.ln(triplet.interval)
     )
-
