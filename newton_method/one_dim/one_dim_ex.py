@@ -19,7 +19,7 @@ from practice_interval.newton_method.one_dim.symbolic_package.symbolic_function_
 f = lambda x: x ** 2 + 2 * x * Decimal(math.sin(x)) - 4
 der_f = lambda x: 2 * x + 2 * x.sin(x) + 2 * x * x.cos(x)
 
-a = Interval([-10, 10])
+a = Interval([-20, 10])
 a.setprecision(40)
 
 # n = NewtonComputations(f, der_f, a)
@@ -31,7 +31,7 @@ a.setprecision(40)
 f = lambda x: x ** 2 + 2 * x * Decimal(math.sin(x)) - 4
 der_f = lambda x: 2 * x + 2 * x.sin(x) + 2 * x * x.cos(x)
 
-a = Interval([2, 5])
+a = Interval([-10, 0])
 a.setprecision(40)
 
 # n = NewtonComputations(f, der_f, a)
@@ -42,9 +42,11 @@ a.setprecision(40)
 
 # a = Interval([-.39, .39])
 # a = Interval([-12, -9])
-a = Interval([0.2, 7])
-# a = Interval([-.2, .847])
-a.setprecision(40)
+# a = Interval([math.pi + 0.1, 2 * math.pi - 0.1])
+# a = Interval([math.pi + 0.1, 2 * math.pi - 0.1])
+a = Interval([-10, 10])
+# a = Interval([-11, 10])
+a.setprecision(20)
 
 x = Symbol('x')
 # f = (-0.5 * x ** 2) * log(x) + 5
@@ -221,6 +223,7 @@ def sigma_oper(arr):
         result = result + arr[i]
     return result
 
+
 def f1(x):
     if isinstance(x, Triplet):
         return sigma_oper([Triplet.from_number(k) * triplet_cos(Triplet.from_number(k+1) * x + Triplet.from_number(k))  for k in range(0, 6)]) + Triplet.from_number(12)
@@ -228,28 +231,65 @@ def f1(x):
         return sigma_oper([k * Decimal(math.cos(x * (k + 1) + k)) for k in range(0, 6)]) + 12
 
 
+def f2(x):
+
+    if isinstance(x, Triplet):
+        if x.interval.sin(x.interval)[0] > x.interval.cos(x.interval)[1]:
+            return triplet_sin(x)
+        else:
+            return triplet_cos(x)
+    else:
+        if math.sin(x) > math.cos(x):
+            return math.sin(x)
+        else:
+            return math.cos(x)
+
+
+# def f3(x):
+#
+#     if isinstance(x, Triplet):
+#         result = []
+#         if x.interval[1] <= 1:
+#             result.append(x ** 2 + Triplet.from_number(0.5))
+#         elif x.interval[1] <= 3 and x.interval[0] > 1:
+#             result.append(Triplet.from_number(5) * triplet_sin(Triplet.from_number(2*pi) * x) + Triplet.from_number(1.5))
+#         else:
+#             result.append(x - Triplet.from_number(5))
+#         return result
+#     else:
+#         result = []
+#         if x <= 1:
+#             return x ** 2 + Decimal(0.5)
+#         elif x <= 3 and x > 1:
+#             return 5*Decimal(math.sin(2*pi*x)) + Decimal(1.5)
+#         elif x > 3:
+#              return x - Decimal(5)
+
+
 F = [
-    Func("(x+1)^3/x^2-7.1", lambda x: ((x + Triplet.from_number(1)) ** 3) / (x ** 2) - Triplet.from_number(7.1) if isinstance(x, Triplet) else ((x + Decimal(1)) ** 3) / (x ** 2) - Decimal(7.1)),
-    Func("(x^2-5x+6)/(x^2+1)-0.5", lambda x: (x ** 2 - Triplet.from_number(5) * x + Triplet.from_number(6)) / (x ** 2 + Triplet.from_number(1)) - Triplet.from_number(0.5) if isinstance(x, Triplet) else (x ** 2 - 5 * x + 6) / (x ** 2 + 1) - Decimal(0.5)),
+    # Func("(x+1)^3/x^2-7.1", lambda x: ((x + Triplet.from_number(1)) ** 3) / (x ** 2) - Triplet.from_number(7.1) if isinstance(x, Triplet) else ((x + Decimal(1)) ** 3) / (x ** 2) - Decimal(7.1)),
+    # Func("(x^2-5x+6)/(x^2+1)-0.5", lambda x: (x ** 2 - Triplet.from_number(5) * x + Triplet.from_number(6)) / (x ** 2 + Triplet.from_number(1)) - Triplet.from_number(0.5) if isinstance(x, Triplet) else (x ** 2 - 5 * x + 6) / (x ** 2 + 1) - Decimal(0.5)),
     # lambda x: triplet_sin(x / Triplet.from_number(2)) - Triplet.from_number(0.5) if isinstance(x, Triplet) else math.sin(x / 2) - 0.5,
-    Func("-x+sin(3x)+1", lambda x: -x + triplet_sin(Triplet.from_number(3) * x) + Triplet.from_number(1) if isinstance(x, Triplet) else -x + Decimal(math.sin(3 * x)) + 1),
+    # Func("-x+sin(3x)+1", lambda x: -x + triplet_sin(Triplet.from_number(3) * x) + Triplet.from_number(1) if isinstance(x, Triplet) else -x + Decimal(math.sin(3 * x)) + 1),
     # # lambda x: triplet_sin(x) - Triplet.from_number(0.5) if isinstance(x, Triplet) else Decimal(math.sin(x)) - Decimal(0.5),
     # lambda x: x ** 3 - triplet_exp(Triplet.from_number(2) / x) if isinstance(x, Triplet) else x ** 3 - Decimal(math.exp(2 / x)),
-    Func("cos(x)-sin(5x)+1", lambda x: triplet_cos(x) - triplet_sin(Triplet.from_number(5) * x) + Triplet.from_number(1) if isinstance(x, Triplet) else Decimal(math.cos(x)) - Decimal(math.sin(5 * x)) + Decimal(1)),
-    Func("2(x-3)^2-e^(x/2)+5", lambda x: Triplet.from_number(2) * (x - Triplet.from_number(3)) ** 2 - triplet_exp(x / Triplet.from_number(2)) + Triplet.from_number(5) if isinstance(x, Triplet) else 2  * (x - 3) ** 2 - Decimal(math.exp(x / 2)) + 5),
-    Func("ln(3x)*ln(2x) - 1", lambda x: triplet_log(Triplet.from_number(3) * x) * triplet_log(Triplet.from_number(2) * x) - Triplet.from_number(1) if isinstance(x, Triplet) else math.log(3*x)*math.log(2*x) - 1),
+    # Func("cos(x)-sin(5x)+1", lambda x: triplet_cos(x) - triplet_sin(Triplet.from_number(5) * x) + Triplet.from_number(1) if isinstance(x, Triplet) else Decimal(math.cos(x)) - Decimal(math.sin(5 * x)) + Decimal(1)),
+    # Func("2(x-3)^2-e^(x/2)+5", lambda x: Triplet.from_number(2) * (x - Triplet.from_number(3)) ** 2 - triplet_exp(x / Triplet.from_number(2)) + Triplet.from_number(5) if isinstance(x, Triplet) else 2  * (x - 3) ** 2 - Decimal(math.exp(x / 2)) + 5),
+    # Func("ln(3x)*ln(2x) - 1", lambda x: triplet_log(Triplet.from_number(3) * x) * triplet_log(Triplet.from_number(2) * x) - Triplet.from_number(1) if isinstance(x, Triplet) else math.log(3*x)*math.log(2*x) - 1),
     # lambda x: triplet_sqrt(Triplet.from_number(5) * x) - Triplet.from_number(1) if isinstance(x, Triplet) else math.sqrt(5 * x) - 1,
     # lambda x: triplet_cos(Triplet.from_number(5) * x) - Triplet.from_number(0.5) if isinstance(x, Triplet) else math.cos(5*x) - 0.5,
-    Func("x+sin(5x)", lambda x: x + triplet_sin(Triplet.from_number(5) * x) if isinstance(x, Triplet) else x + Decimal(math.sin(5*x))),
-    Func("2*sin(x)*exp(-x)", lambda x: Triplet.from_number(2) * triplet_sin(x) * triplet_exp(-x) if isinstance(x, Triplet) else 2 * math.sin(x) * math.exp(-x)),
+    # Func("x+sin(5x)", lambda x: x + triplet_sin(Triplet.from_number(5) * x) if isinstance(x, Triplet) else x + Decimal(math.sin(5*x))),
+    # Func("2*sin(x)*exp(-x)", lambda x: Triplet.from_number(2) * triplet_sin(x) * triplet_exp(-x) if isinstance(x, Triplet) else 2 * math.sin(x) * math.exp(-x)),
     # lambda x: triplet_exp(x / Triplet.from_number(2)) - Triplet.from_number(2) * x if isinstance(x, Triplet) else Decimal(math.exp(x / 2)) - 2 * x,
-    Func("x*|sin(x)| + 6",lambda x: x * abs(triplet_sin(x)) + Triplet.from_number(6) if isinstance(x, Triplet) else x * abs(Decimal(math.sin(x))) + Decimal(6)),
-    Func("|x*sin(x)|-1.5", lambda x: abs(x * triplet_sin(x)) - Triplet.from_number(1.5) if isinstance(x, Triplet) else abs(x * Decimal(math.sin(x))) - Decimal(1.5)),
-    Func("-exp(sin(3x))+1", lambda x: -triplet_exp(triplet_sin(Triplet.from_number(3) * x)) + Triplet.from_number(1) if isinstance(x,Triplet) else -math.exp(math.sin(3 * x)) + 1),
-    Func("exp(x^2)-2", lambda x: triplet_exp(x ** 2) - Triplet.from_number(2) if isinstance(x,Triplet) else Decimal(math.exp(x ** 2)) - 2),
-    Func("2/100*x^2 - 3/100*exp(-20*(x-0.875)^2)", lambda x: Triplet.from_number(2/100)*x**2 - Triplet.from_number(3/100)*triplet_exp(-Triplet.from_number(20)*(x-Triplet.from_number(0.875))**2) if isinstance(x, Triplet) else Decimal((2/100))*x**2 - Decimal((3/100))*Decimal(math.exp(-20*(x-Decimal(0.875))**2))),
-    Func("sum([k * cos(x * (k + 1) + k) for k in range(0, 6)]) + 12)", lambda x: f1(x)),
-    # Func("x^6-15x^4+27x^3+250", lambda x: x**6 - Triplet.from_number(15)*x**4 + Triplet.from_number(27)*x**3+Triplet.from_number(250) if isinstance(x,Triplet) else x**6 - 15 * x**4 + 27 * x**3 + 250),
+    # Func("x*|sin(x)| + 6",lambda x: x * abs(triplet_sin(x)) + Triplet.from_number(6) if isinstance(x, Triplet) else x * abs(Decimal(math.sin(x))) + Decimal(6)),
+    # Func("f2", lambda x: f2(x)),
+    # Func("f3", lambda x: f3(x)),
+    # Func("|x*sin(x)|-1.5", lambda x: abs(x * triplet_sin(x)) - Triplet.from_number(1.5) if isinstance(x, Triplet) else abs(x * Decimal(math.sin(x))) - Decimal(1.5)),
+    # Func("-exp(sin(3x))+1", lambda x: -triplet_exp(triplet_sin(Triplet.from_number(3) * x)) + Triplet.from_number(1) if isinstance(x,Triplet) else -math.exp(math.sin(3 * x)) + 1),
+    # Func("exp(x^2)-2", lambda x: triplet_exp(x ** 2) - Triplet.from_number(2) if isinstance(x,Triplet) else Decimal(math.exp(x ** 2)) - 2),
+    # Func("2/100*x^2 - 3/100*exp(-20*(x-0.875)^2)", lambda x: Triplet.from_number(2/100)*x**2 - Triplet.from_number(3/100)*triplet_exp(-Triplet.from_number(20)*(x-Triplet.from_number(0.875))**2) if isinstance(x, Triplet) else Decimal((2/100))*x**2 - Decimal((3/100))*Decimal(math.exp(-20*(x-Decimal(0.875))**2))),
+    # Func("sum([k * cos(x * (k + 1) + k) for k in range(0, 6)]) + 12)", lambda x: f1(x)),
+    Func("x^6-15x^4+27x^3+250", lambda x: x**6 - Triplet.from_number(15)*x**4 + Triplet.from_number(27)*x**3+Triplet.from_number(250) if isinstance(x,Triplet) else x**6 - 15 * x**4 + 27 * x**3 + 250),
 ]
 
 PATH = "csv_adapter/tests/slope_tests"
