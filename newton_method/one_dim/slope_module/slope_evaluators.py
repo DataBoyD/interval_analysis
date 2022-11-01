@@ -50,7 +50,7 @@ def evaluate_slope_otherwise_outer(internal_triplet_range,
             (outer_triplet_range[1] - outer_triplet_at_c[1]) / (internal_triplet_range[1] - internal_triplet_at_c[1])
 
         ])
-    else:
-        return outer_triplet_range
+    # else:
+    #     return outer_triplet_range
         # possible returning result
         # return 1 / internal_triplet_range
