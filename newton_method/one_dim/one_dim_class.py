@@ -108,8 +108,10 @@ class NewtonIntervalIterationProcess:
 
             # вычисляем середину интервала $$\Tilde{x}$$
             mid = (result[0] + result[1]) / 2
+            print("MID: ", mid)
 
             triplet = Triplet(interval=result, value_at_c=Interval.valueToInterval(mid), slope=1)
+            print("TRIPLE: ", triplet )
 
             # вычисляем обратный интервал к первой производной
             division = 1 / self.f(triplet).slope
@@ -120,6 +122,8 @@ class NewtonIntervalIterationProcess:
                 # обрабатываем каждый луч отдельно (запускаем для них отдельные итерационные процессы)
                 for i in division:
                     newt_iter = mid - self.f(mid) * i
+                    print("NEWT OPER: ", newt_iter)
+
                     # newt_iter = Interval.valueToInterval(mid) - self.f(Interval.valueToInterval(mid)) * i
 
                     t = NewtonIntervalIterationProcess(self.f,
@@ -135,6 +139,8 @@ class NewtonIntervalIterationProcess:
                 # в обычной ситуации действуем по привычному алгоритму
                 triplet = Triplet(interval=result, value_at_c=Interval.valueToInterval(mid), slope=1)
                 newt_iter = mid - self.f(mid) / self.f(triplet).slope
+                print("TRIPLE: ", triplet)
+                print("NEWT OPER: ", newt_iter)
                 # newt_iter = Interval.valueToInterval(mid) - self.f(Interval.valueToInterval(mid)) / self.f(triplet).slope
 
                 # чтобы не допустить попадание None в массив результатов, добавляем данное условие
@@ -144,7 +150,7 @@ class NewtonIntervalIterationProcess:
                     break
 
                 result = intersection(result, newt_iter)
-                # print(result)
+                print("RESULT: ", result)
                 if result.width() <= self.eps:
                     self.domain.common_base.append(result)
                     break
