@@ -27,13 +27,22 @@ class Func:
 
 @dataclasses.dataclass
 class Pair:
+    '''
+    Элементы кусочно заданных функций
+
+    f: Func - функция, принимающая triplet или decimal
+
+    constraint: Interval - интервал, на котором определена f
+    '''
     f: Func
     constraint: List[Interval]
 
 
 class Piecewise:
+
     def __init__(self, pairs: List[Pair]):
         self.pairs = pairs
+        self.repository = []
 
     def run_with_slope(self, primary_interval: Interval):
         for p in self.pairs:
@@ -42,7 +51,10 @@ class Piecewise:
                 if intersection_result is not None:
                     n = NewtonComputations(p.f, p.f, 0, intersection_result, eps=1e-5)
                     n.run_slope()
-                    print(n.common_base)
+                    if len(n.common_base) > 0:
+                        self.repository.append(n.common_base.copy())
+                    # n.common_base.clear()
+        print(f"COMMON REPO: {self.repository}")
 
 
 # p: List[Pair] = [
@@ -57,21 +69,21 @@ class Piecewise:
 # ]
 
 
-# p: List[Pair] = [
-#     Pair(
-#         Func("f1", lambda x: -x + Triplet.from_number(4) if isinstance(x, Triplet) else -x + 4),
-#         Interval(["-Infinity", 3])
-#     ),
-#     Pair(
-#         Func("f2", lambda x: Triplet.from_number(Decimal(- 8 / 9)) * x ** 2 + Triplet.from_number(
-#             8) * x - Triplet.from_number(15) if isinstance(x, Triplet) else Decimal((-8 / 9)) * x ** 2 + 8 * x - 15),
-#         Interval([3, 6])
-#     ),
-#     Pair(
-#         Func("f1", lambda x: x - Triplet.from_number(5) if isinstance(x, Triplet) else x - 5),
-#         Interval([6, "Infinity"])
-#     )
-# ]
+p: List[Pair] = [
+    Pair(
+        Func("f1", lambda x: -x + Triplet.from_number(4) if isinstance(x, Triplet) else -x + 4),
+        [Interval(["-Infinity", 3])]
+    ),
+    Pair(
+        Func("f2", lambda x: Triplet.from_number(Decimal(- 8 / 9)) * x ** 2 + Triplet.from_number(
+            8) * x - Triplet.from_number(17) if isinstance(x, Triplet) else Decimal((-8 / 9)) * x ** 2 + 8 * x - 17),
+        [Interval([3, 6])]
+    ),
+    Pair(
+        Func("f1", lambda x: x - Triplet.from_number(5) if isinstance(x, Triplet) else x - 5),
+        [Interval([6, "Infinity"])]
+    )
+]
 
 # p: List[Pair] = [
 #     Pair(
@@ -84,18 +96,18 @@ class Piecewise:
 #     )
 # ]
 
-p: List[Pair] = [
-    Pair(
-        Func("f1", lambda x: triplet_sin(Triplet.from_number(5) * x) + Triplet.from_number(2) if isinstance(x, Triplet) else math.sin(5 * x) + 2),
-        [Interval(["-Infinity", math.pi])]
-    ),
-    Pair(
-        Func("f2", lambda x: Triplet.from_number(5) * triplet_sin(x) + Triplet.from_number(2) if isinstance(x, Triplet) else 5 * math.sin(x) + 2),
-        [Interval(["Infinity", math.pi])]
-    )
-]
+# p: List[Pair] = [
+#     Pair(
+#         Func("f1", lambda x: triplet_sin(Triplet.from_number(5) * x) + Triplet.from_number(2) if isinstance(x, Triplet) else math.sin(5 * x) + 2),
+#         [Interval(["-Infinity", math.pi])]
+#     ),
+#     Pair(
+#         Func("f2", lambda x: Triplet.from_number(5) * triplet_sin(x) + Triplet.from_number(2) if isinstance(x, Triplet) else 5 * math.sin(x) + 2),
+#         [Interval(["Infinity", math.pi])]
+#     )
+# ]
 
 
 piec = Piecewise(p)
-primary = Interval([0.2,7])
+primary = Interval([0, 10])
 piec.run_with_slope(primary)
