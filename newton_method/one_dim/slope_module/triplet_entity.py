@@ -36,13 +36,19 @@ class Triplet:
         )
 
     def __sub__(self, other):
+        print(self, other, union(self.interval))
+
+
         return Triplet(
-            interval=self.interval - other.interval,
-            value_at_c=self.point - other.point,
-            slope=self.slope - other.slope
-        )
+                interval=self.interval - other.interval,
+                value_at_c=self.point - other.point,
+                slope=self.slope - other.slope
+            )
+
+
 
     def __mul__(self, other):
+        print(self, other)
         return Triplet(
             interval=self.interval * other.interval,
             value_at_c=self.point * other.point,
@@ -84,6 +90,15 @@ class Triplet:
         )
 
 
-
-
-
+def union(x):
+    try:
+        if isinstance(x, list):
+            min_bound = min(x[0][0], x[1][0])
+            max_bound = max((x[0][1], x[1][1]))
+            return Interval([min_bound, max_bound])
+        if isinstance(x, Decimal):
+            return Interval.valueToInterval(x)
+    except Exception as exc:
+        print(min_bound, max_bound)
+        print(exc, x)
+    return x

@@ -109,5 +109,5 @@ p: List[Pair] = [
 
 
 piec = Piecewise(p)
-primary = Interval([0, 10])
+primary = Interval([-10, 10])
 piec.run_with_slope(primary)
