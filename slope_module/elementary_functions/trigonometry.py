@@ -1,9 +1,12 @@
 import math
 from decimal import Decimal
 
-from practice_interval.interval_lib import Interval
-from practice_interval.newton_method.one_dim.slope_module.slope_evaluators import evaluate_slope_otherwise_internal, evaluate_slope_otherwise_outer
-from practice_interval.newton_method.one_dim.slope_module.triplet_entity import Triplet
+from slope_module.triplet_entity import Triplet
+
+
+# from practice_interval.interval_lib import Interval
+# from practice_interval.newton_method.one_dim.slope_module.slope_evaluators import evaluate_slope_otherwise_internal, evaluate_slope_otherwise_outer
+# from practice_interval.newton_method.one_dim.slope_module.triplet_entity import Triplet
 
 
 def triplet_sin(triplet: Triplet) -> Triplet:

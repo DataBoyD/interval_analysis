@@ -1,4 +1,5 @@
-from practice_interval.newton_method.one_dim.slope_module.triplet_entity import Triplet
+# from practice_interval.newton_method.one_dim.slope_module.triplet_entity import Triplet
+from slope_module.triplet_entity import Triplet
 
 
 def triplet_sqrt(triplet: Triplet):

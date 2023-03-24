@@ -1,11 +1,15 @@
 import math
+from decimal import Decimal
 
-from practice_interval.interval_lib import *
-from practice_interval.newton_method.one_dim.slope_module.slope_evaluators import evaluate_slope_otherwise_outer, \
-    evaluate_slope_otherwise_internal
-from practice_interval.newton_method.one_dim.symbolic_package.symbolic_function_representation import Function
-from practice_interval.newton_method.one_dim.symbolic_package.symbolic_interval_extension import IntervalExtension
+from interval_lib import Interval
 
+
+# from practice_interval.interval_lib import *
+# from practice_interval.newton_method.one_dim.slope_module.slope_evaluators import evaluate_slope_otherwise_outer, \
+#     evaluate_slope_otherwise_internal
+# from practice_interval.newton_method.one_dim.symbolic_package.symbolic_function_representation import Function
+# from practice_interval.newton_method.one_dim.symbolic_package.symbolic_interval_extension import IntervalExtension
+#
 
 class Triplet:
 

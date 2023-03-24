@@ -1,11 +1,14 @@
 import math
 from decimal import Decimal
 
-from elementary_functions import triplet_sin, triplet_sqrt, triplet_cos, triplet_exp, triplet_log
-from elementary_functions.signum import triplet_signum
-from practice_interval.interval_lib import Interval
-from practice_interval.newton_method.one_dim.intersection_tools import intersection
-from triplet_entity import Triplet
+from slope_module.elementary_functions import triplet_sin, triplet_sqrt, triplet_cos, triplet_exp, triplet_log
+from slope_module.elementary_functions.signum import triplet_signum
+from interval_lib import Interval
+from newton_method.one_dim.intersection_tools import intersection
+from slope_module.triplet_entity import Triplet
+
+
+# from  import Triplet
 
 
 class BranchAndBoundAlgorithm:

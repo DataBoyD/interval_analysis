@@ -1,6 +1,8 @@
-from practice_interval.newton_method.one_dim.slope_module.slope_evaluators import evaluate_slope_otherwise_outer, \
-    evaluate_slope_otherwise_internal
-from practice_interval.newton_method.one_dim.slope_module.triplet_entity import Triplet
+# from one_dim.slope_module.slope_evaluators import evaluate_slope_otherwise_outer, \
+#     evaluate_slope_otherwise_internal
+# from practice_interval.newton_method.one_dim.slope_module.triplet_entity import Triplet
+from slope_module.slope_evaluators import evaluate_slope_otherwise_outer, evaluate_slope_otherwise_internal
+from slope_module.triplet_entity import Triplet
 
 
 def triplet_exp(triplet: Triplet):

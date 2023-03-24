@@ -1,4 +1,5 @@
-from practice_interval.interval_lib import Interval
+# from practice_interval.interval_lib import Interval
+from interval_lib import Interval
 
 
 def evaluate_slope_otherwise_internal(internal_triplet_range,
