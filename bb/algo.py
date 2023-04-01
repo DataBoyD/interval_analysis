@@ -33,9 +33,13 @@ class BranchAndBoundAlgorithm:
     def run(self):
 
         # проводим тест на монотонность
+        # формируем массив slope по-новому. Вычисляем наклон относительно обоих концов интервала
+
+        # относительно левого
         t_left = Triplet(interval=self.S, value_at_c=Interval.valueToInterval(self.S[0]), slope=1)
         t_left: Triplet = self.f(t_left)
 
+        # относительно правого
         t_right = Triplet(interval=self.S, value_at_c=Interval.valueToInterval(self.S[1]), slope=1)
         t_right: Triplet = self.f(t_right)
 
@@ -52,8 +56,7 @@ class BranchAndBoundAlgorithm:
         x = self.grad_test(self.S, lb_down, lb_up, self.f_tilde, g=slope)
 
         # переопределяем f_cap и lb
-        # f_cap = lb_up = lb_down = self.f_tilde
-        f_cap = self.f_tilde
+        f_cap = lb_up = lb_down = self.f_tilde
 
         # определяем минорирующую оценку f_z_min
         # t = Triplet(interval=x, value_at_c=Interval.valueToInterval(self.middle_of_interval(x)), slope=1)
@@ -65,15 +68,9 @@ class BranchAndBoundAlgorithm:
         t_right = Triplet(interval=x, value_at_c=Interval.valueToInterval(x[1]), slope=1)
         t_right: Triplet = self.f(t_right)
 
-        t_middle = Triplet(interval=x, value_at_c=Interval.valueToInterval(self.middle_of_interval(x)), slope=1)
-        t_middle: Triplet = self.f(t_middle)
-
         slope = [t_left.slope[0], t_right.slope[1]]
 
-        lb_down = self.f(x[0])
-        lb_up = self.f(x[1])
-
-        f_z_min = self.define_f_z(self.define_lower_boundary(lb_down, lb_up, x, slope), t_middle.interval[0])
+        f_z_min = self.define_f_z(self.define_lower_boundary(lb_down, lb_up, x, slope), t_left.interval[0])
 
         # выполняем алгоритм отбора
         if x.width() < self.eps:
@@ -113,15 +110,15 @@ class BranchAndBoundAlgorithm:
                 x_1, x_2 = Interval([x[0], mid]), Interval([mid, x[1]])
 
                 # определяем новые lb для каждого интервала по алгоритму
-                # lb_x_1_down, lb_x_1_up, lb_x_2_down, lb_x_2_up = [None] * 4
-                # lb_x_1_down = lb_x_2_up = f_cap
-                # lb_x_1_up = lb_x_2_down = self.f(mid)
+                lb_x_1_down, lb_x_1_up, lb_x_2_down, lb_x_2_up = [None] * 4
+                lb_x_1_down = lb_x_2_up = f_cap
+                lb_x_1_up = lb_x_2_down = self.f(mid)
 
-                lb_x_1_down = self.f(x_1[0])
-                lb_x_1_up = self.f(x_1[1])
-
-                lb_x_2_down = self.f(x_2[0])
-                lb_x_2_up = self.f(x_2[1])
+                # lb_x_1_down = self.f(x_1[0])
+                # lb_x_1_up = self.f(x_1[1])
+                #
+                # lb_x_2_down = self.f(x_2[0])
+                # lb_x_2_up = self.f(x_2[1])
 
                 # проводим GradTest для x_1
                 x_1 = self.grad_test(x_1, lb_x_1_down, lb_x_1_up, self.f_tilde, slope)
@@ -129,11 +126,12 @@ class BranchAndBoundAlgorithm:
                     print("X1= ", x_1, " WIDTH = ", x_1.width())
 
                     # определяем новые lb для x_1
-                    f_cap_x_1 = self.f_tilde
+                    lb_x_1_down = lb_x_1_up = f_cap_x_1 = self.f_tilde
+                    # f_cap_x_1 = self.f_tilde
 
-                    t_1_left = Triplet(interval=x_1, value_at_c=Interval.valueToInterval(self.middle_of_interval(x_1)),
+                    t_1 = Triplet(interval=x_1, value_at_c=Interval.valueToInterval(self.middle_of_interval(x_1)),
                                        slope=1)
-                    t_1_left: Triplet = self.f(t_1_left)
+                    t_1: Triplet = self.f(t_1)
                     #
                     # t_1_right = Triplet(interval=x_1, value_at_c=Interval.valueToInterval(x_1[1]), slope=1)
                     # t_1_right: Triplet = self.f(t_1_right)
@@ -146,7 +144,7 @@ class BranchAndBoundAlgorithm:
                         lb_x_1_up = self.f(x_1[1])
 
                         f_z_min_x_1 = self.define_f_z(self.define_lower_boundary(lb_x_1_down, lb_x_1_up, x_1, slope),
-                                                      t_1_left.interval[0])
+                                                      t_1.interval[0])
                         if f_z_min_x_1 < self.f_tilde:
                             # self.f_tilde = f_z_min_x_1
                             if x_1.width() < self.eps:
@@ -158,13 +156,14 @@ class BranchAndBoundAlgorithm:
                 if x_2:
                     print("X2= ", x_2, " WIDTH = ", x_2.width())
 
-                    f_cap_x_2 = self.f_tilde
+                    # f_cap_x_2 = self.f_tilde
+                    lb_x_2_down = lb_x_2_up = f_cap_x_2 = self.f_tilde
 
-                    # t_2 = Triplet(interval=x_2, value_at_c=Interval.valueToInterval(self.middle_of_interval(x_2)), slope=1)
-                    # t_2: Triplet = self.f(t_2)
-                    t_2_left = Triplet(interval=x_2, value_at_c=Interval.valueToInterval(self.middle_of_interval(x_2)),
-                                       slope=1)
-                    t_2_left: Triplet = self.f(t_2_left)
+                    t_2 = Triplet(interval=x_2, value_at_c=Interval.valueToInterval(self.middle_of_interval(x_2)), slope=1)
+                    t_2: Triplet = self.f(t_2)
+                    # t_2_left = Triplet(interval=x_2, value_at_c=Interval.valueToInterval(self.middle_of_interval(x_2)),
+                    #                    slope=1)
+                    # t_2_left: Triplet = self.f(t_2_left)
 
                     # t_2_right = Triplet(interval=x_2, value_at_c=Interval.valueToInterval(x_2[1]), slope=1)
                     # t_2_right: Triplet = self.f(t_2_right)
@@ -175,7 +174,7 @@ class BranchAndBoundAlgorithm:
                         lb_x_2_down = self.f(x_2[0])
                         lb_x_2_up = self.f(x_2[1])
                         f_z_min_x_2 = self.define_f_z(self.define_lower_boundary(lb_x_2_down, lb_x_2_up, x_2, slope),
-                                                      t_2_left.interval[0])
+                                                      t_2.interval[0])
                         if f_z_min_x_2 < self.f_tilde:
                             # self.f_tilde = f_z_min_x_2
                             if x_2.width() < self.eps:
@@ -276,9 +275,9 @@ def my_abs(x):
     return abs(x) / x
 
 
-# bb = BranchAndBoundAlgorithm(f=Func("|x-2| * x + sin(x) - 1", lambda x: abs(x-Triplet.from_number(2)) * x  + triplet_sin(x) - Triplet.from_number(1) if isinstance(x, Triplet) else  abs(Decimal(x-2))*x + Decimal(math.sin(x) - 1)),
-#                              s=Interval([1, 4]),
-#                              eps=1e-5)
+bb = BranchAndBoundAlgorithm(f=Func("|x-2| * x + sin(x) - 1", lambda x: abs(x-Triplet.from_number(2)) * x + triplet_sin(x) - Triplet.from_number(1) if isinstance(x, Triplet) else abs(Decimal(x-2)) * x + Decimal(math.sin(x) - 1)),
+                             s=Interval([1,2.5]),
+                             eps=1e-5)
 
 # bb = BranchAndBoundAlgorithm(f=Func("|x-2|sin(x) - 1", lambda x: abs(x-Triplet.from_number(2))*triplet_sin(x) - Triplet.from_number(1) if isinstance(x, Triplet) else  abs(x-2)*Decimal(math.sin(x)) - Decimal(1)),
 #                              s=Interval([0.2, 7]),
@@ -313,8 +312,8 @@ def my_abs(x):
 #                              s=Interval([0.2, 7]),
 #                              eps=1e-3)
 
-bb = BranchAndBoundAlgorithm(f=Func("(x-3)^2-250", lambda x: ((x-Triplet.from_number(3))**2 - Triplet.from_number(250) if isinstance(x, Triplet) else (x-3)**2 - 250)),
-                             s=Interval([0, 10]),
-                             eps=1e-5)
+# bb = BranchAndBoundAlgorithm(f=Func("(x-3)^2-250", lambda x: ((x-Triplet.from_number(3))**2 - Triplet.from_number(250) if isinstance(x, Triplet) else (x-3)**2 - 250)),
+#                              s=Interval([0, 10]),
+#                              eps=1e-5)
 
 print("RESULT: ", bb.run())
