@@ -40,7 +40,7 @@ class Triplet:
         )
 
     def __sub__(self, other):
-        print(self, other, union(self.interval))
+        # print(self, other, union(self.interval))
 
 
         return Triplet(
@@ -52,7 +52,7 @@ class Triplet:
 
 
     def __mul__(self, other):
-        print(self, other)
+        # print(self, other)
         return Triplet(
             interval=self.interval * other.interval,
             value_at_c=self.point * other.point,
